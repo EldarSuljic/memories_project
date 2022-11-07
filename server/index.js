@@ -3,22 +3,26 @@ import bodyParser from 'body-parser';
 import mongoose from 'mongoose';
 import cors from 'cors';
 
-const app = express(); //ovo se radi sa svakom express app. inicijalizacija appa
+import postRoutes from './routes/posts.js';
 
-app.use(bodyParser.json({ limit: "30mb", extended: true})); //ogranicenja neka tipa za slike kad se salju zahtjevi
+const app = express(); //this is what we do with any express app, app initialization
+//now we can use express middleware to connect this to our application
+app.use('/posts', postRoutes); //this means that every route in post routes is goint to start with /posts so localhost:5000/posts
+
+app.use(bodyParser.json({ limit: "30mb", extended: true})); //some limitations for example for images when requests are send
 app.use(bodyParser.urlencoded({ limit: "30mb", extended: true}));
 app.use(cors());
 
 const CONNECTION_URL = 'mongodb+srv://EldarSuljic:vedobrat6@cluster0.p7wu6mi.mongodb.net/?retryWrites=true&w=majority';
-//napravio sam prethodno cloud database cluster mongodb
+//previously I made a cloud database cluster, mongodb
 const PORT = process.env.PORT || 5000;
 
-//za konekciju sa bazom podataka
+//for connecion with dataBase
 mongoose.connect(CONNECTION_URL, { useNewUrlParser: true, useUnifiedTopology: true})
-.then(() => app.listen(PORT, () => console.log(`Server runing on port: ${PORT}`)) ) 
-//ako je konekcija na bazu podataka uspjesna sta zelimo da se desi: da pozovemo nas app i onda na to zelimo da se uradi app.listen
+.then(() => app.listen(PORT, () => console.log(`Server runing on port: ${PORT}`)) )
+//if connection on dataBase is succesfull: to call our app and then on it call app.listen
 .catch((error) => console.log(error.message));
-//ako konekcija na bazu podataka nije uspjesna
+//if connection dataBase is unsuccesfull: just log error message
 
 //mongoose.set('useFindAndModify', false);
-//ovo se pobrine da nema warninga u konzoli, al ova gore linije pravi gresku
+//this one makes sure that there is no warnings, but this line doesnt work for me
