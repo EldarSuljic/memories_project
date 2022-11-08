@@ -1,6 +1,26 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
+//provider is going to keep track of that store which is that global state and that allows us to access that
+//store from anywhere inside of the app, we dont have to be exactly in a parent or a child component
+//import { applyMiddleware, compose} from 'redux';
+import { configureStore } from '@reduxjs/toolkit';
+//import thunk from 'redux-thunk';
+
+import reducers from './reducers';
 
 import App from './App';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+const store = configureStore({
+    reducer: { reducers: reducers}
+});
+
+ReactDOM.render(
+    //wrap out application with a provider component
+    <Provider store={store}>
+        <App />
+    </Provider>,
+     document.getElementById('root')
+);
+
+//compose(applyMiddleware(thunk))
