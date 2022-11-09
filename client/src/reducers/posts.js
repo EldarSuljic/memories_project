@@ -2,10 +2,10 @@
 //returns either action or the state changed by the action, usually multiple if statements, thats why switch is prefered
 
 // eslint-disable-next-line import/no-anonymous-default-export
-export default (posts = {}, action) => {
+export default (posts = [], action) => {
     switch (action.type) {
         case 'FETCH_ALL':
-            return posts;
+            return action.payload;
         case 'CREATE':
             return posts;
         default:

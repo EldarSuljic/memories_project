@@ -4,7 +4,7 @@ import useStyles from '/home/eldar/Desktop/memories_project/memories_project/cli
 const Post = () => {
     const classes = useStyles();
     return (
-        <h1 className={classes.heading}>POST</h1>
+        <h1>POST</h1>
     );
 
 }

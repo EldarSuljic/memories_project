@@ -12,7 +12,7 @@ const Posts = () => {
     
     return (
     <>
-        <h1 className={classes.heading}>POSTS</h1>
+        <h1>POSTS</h1>
         <Post />
         <Post />
     </>
