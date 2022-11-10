@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import useStyles from '/home/eldar/Desktop/memories_project/memories_project/client/src/style.js';
+import useStyles from './styles';
+//import useStyles from '/home/eldar/Desktop/memories_project/memories_project/client/src/style.js';
 import { TextField, Button, Typography, Paper } from '@material-ui/core';
 import FileBase from 'react-file-base64';
 import { useDispatch } from 'react-redux';

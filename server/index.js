@@ -15,13 +15,14 @@ const corsOptions ={
 //app.use(cors(corsOptions));
 
 const app = express(); //this is what we do with any express app, app initialization
-//now we can use express middleware to connect this to our application
 
+//general setup
 app.use(bodyParser.json({ limit: "30mb", extended: true})); //some limitations for example for images when requests are send
 app.use(bodyParser.urlencoded({ limit: "30mb", extended: true}));
 app.use(cors(corsOptions));
-
+//now we can use express middleware to connect this to our application
 app.use('/posts', postRoutes); //this means that every route in post routes is goint to start with /posts so localhost:5000/posts
+
 const CONNECTION_URL = 'mongodb+srv://EldarSuljic:vedobrat6@cluster0.p7wu6mi.mongodb.net/?retryWrites=true&w=majority';
 //previously I made a cloud database cluster, mongodb
 const PORT = process.env.PORT || 5000;
