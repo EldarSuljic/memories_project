@@ -11,11 +11,11 @@ import { configureStore } from '@reduxjs/toolkit';
 import reducers from './reducers';
 
 import App from './App';
-
+//redux setting
 const store = configureStore({
     reducer: { reducers: reducers}
 });
-
+//**EXAMPLE HOW TO USE IT IN OLDER VERSION OF REACT, BELOW IS CODE FOR NEW VERSION**/
 // ReactDOM.render(
 //     //wrap out application with a provider component
 //     <Provider store={store}>

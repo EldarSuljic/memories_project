@@ -6,7 +6,9 @@ import { useSelector } from 'react-redux';
 import useStyles from './styles';
 
 const Posts = () => {
-    const posts = useSelector((state) => state.posts)
+    //fetching the data in this component, after all that Redux data swapping
+    const posts = useSelector((state) => state.posts);//we again initialize it as a hook, as a parametar in callback function,
+    //we get acces to that whole global redux store or state and then we can immediately return state.posts (posts is that reducer)
     const classes = useStyles();
 
     console.log(posts);

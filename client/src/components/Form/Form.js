@@ -12,9 +12,9 @@ const Form = () => {
     const dispatch = useDispatch();
 
     const handleSubmit = (e) => {
-        e.preventDefault();
+        e.preventDefault(); // e is event - this line is not to get the refresh in the browser
 
-        dispatch(createPost(postData))
+        dispatch(createPost(postData)) //dispatching an action
     }
 
     const clear = () => {

@@ -7,10 +7,10 @@ export default (posts = [], action) => {
         case 'FETCH_ALL':
             return action.payload;
         case 'CREATE':
-            return [...posts, action.payload];
+            return [...posts, action.payload]; // spread all the posts (....posts) and then we have to add a new post which is stored in the action.payload
         default:
             return posts;
     }
 }
 
-//renaming state to posts to simplify things because our state is always going to be simply post
+//renaming state to posts to simplify things because our state is always going to be simply post since we have one reducer
