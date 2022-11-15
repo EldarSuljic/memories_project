@@ -12,7 +12,6 @@ const corsOptions ={
     credentials:true,            //access-control-allow-credentials:true
     optionSuccessStatus:200
 }
-//app.use(cors(corsOptions));
 
 const app = express(); //this is what we do with any express app, app initialization
 
