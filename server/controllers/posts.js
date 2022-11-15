@@ -1,41 +1,80 @@
+import express from 'express';
 import mongoose from 'mongoose';
+
 import PostMessage from '../models/postMessage.js';
 
-//all the hendlers for the routes are going to be here so it is more clear and more understadable
+const router = express.Router();
 
-//callback funciton which is going to be executed whenever user visits this route
-export const getPosts = async (req, res) => {
-    try{
-        const postMessages = await PostMessage.find(); //find is asynchronous action(takes time to find something) thats why we add await and async on fuction
-        res.status(200).json(postMessages); //return this if everything works (json will be an array of all messages that we have)
+export const getPosts = async (req, res) => { 
+    try {
+        const postMessages = await PostMessage.find();
+                
+        res.status(200).json(postMessages);
+    } catch (error) {
+        res.status(404).json({ message: error.message });
+    }
+}
 
-    } catch (error){
+export const getPost = async (req, res) => { 
+    const { id } = req.params;
+
+    try {
+        const post = await PostMessage.findById(id);
+        
+        res.status(200).json(post);
+    } catch (error) {
         res.status(404).json({ message: error.message });
     }
 }
 
 export const createPost = async (req, res) => {
-    const post = req.body; //with post requests you have access to request.body
-    const newPost = new PostMessage(post); //creating a new post
+    const { title, message, selectedFile, creator, tags } = req.body;
 
-    try{
-        await newPost.save();
-        res.status(201).json(newPost);
-        
+    const newPostMessage = new PostMessage({ title, message, selectedFile, creator, tags })
+
+    try {
+        await newPostMessage.save();
+
+        res.status(201).json(newPostMessage );
     } catch (error) {
         res.status(409).json({ message: error.message });
     }
 }
 
-
-
 export const updatePost = async (req, res) => {
-    const { id: _id } = req.params;
-    const post = req.body;
+    const { id } = req.params;
+    const { title, message, creator, selectedFile, tags } = req.body;
+    
+    if (!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send(`No post with id: ${id}`);
 
-    if(!mongoose.Types.ObjectId.isValid(_id)) return res.status(404).send('No post with that id');
+    const updatedPost = { creator, title, message, tags, selectedFile, _id: id };
 
-    const updatedPost = await PostMessage.findByIdAndUpdate(_id, post, { new: true });
+    await PostMessage.findByIdAndUpdate(id, updatedPost, { new: true });
 
     res.json(updatedPost);
 }
+
+export const deletePost = async (req, res) => {
+    const { id } = req.params;
+
+    if (!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send(`No post with id: ${id}`);
+
+    await PostMessage.findByIdAndRemove(id);
+
+    res.json({ message: "Post deleted successfully." });
+}
+
+export const likePost = async (req, res) => {
+    const { id } = req.params;
+
+    if (!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send(`No post with id: ${id}`);
+    
+    const post = await PostMessage.findById(id);
+
+    const updatedPost = await PostMessage.findByIdAndUpdate(id, { likeCount: post.likeCount + 1 }, { new: true });
+    
+    res.json(updatedPost);
+}
+
+
+export default router;

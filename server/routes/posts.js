@@ -1,14 +1,14 @@
 import express from 'express';
 
-import { getPosts, createPost, updatePost } from '../controllers/posts.js';
+import { getPosts, getPost, createPost, updatePost, likePost, deletePost } from '../controllers/posts.js';
 
-//seting out our router
 const router = express.Router();
-//now we can start adding our routes
+
 router.get('/', getPosts);
 router.post('/', createPost);
+router.get('/:id', getPost);
 router.patch('/:id', updatePost);
-
-
+router.delete('/:id', deletePost);
+router.patch('/:id/likePost', likePost);
 
 export default router;

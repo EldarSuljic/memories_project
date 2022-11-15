@@ -1,26 +1,53 @@
-import * as api from '../api'; //* means import everything from the actions as api, so you can use it like api.fetchPosts
+import { FETCH_ALL, CREATE, UPDATE, DELETE, LIKE } from '../constants/actionTypes';
 
-//Action Creators - funcitons that return actions
-//action is just an object that has the type and payload
-//since we are be dealing with asynchronous logic we have to add async(dispatch) function
-//and isteand of returning action, we have to dispatch it
+import * as api from '../api/index.js';
+
 export const getPosts = () => async (dispatch) => {
-    try {
-        const { data } = await api.fetchPosts();
+  try {
+    const { data } = await api.fetchPosts();
 
-        dispatch({ type: 'FETCH_ALL', payload: data });
-    } catch (error) {
-        console.log(error.message);
-    }
-   
-}
+    dispatch({ type: FETCH_ALL, payload: data });
+  } catch (error) {
+    console.log(error.message);
+  }
+};
 
 export const createPost = (post) => async (dispatch) => {
-    try {
-        const { data } = await api.createPost(post);
+  try {
+    const { data } = await api.createPost(post);
 
-        dispatch({ type: 'CREATE', payload: data});
-    } catch (error) {
-        console.log(error);
-    }
-}
+    dispatch({ type: CREATE, payload: data });
+  } catch (error) {
+    console.log(error.message);
+  }
+};
+
+export const updatePost = (id, post) => async (dispatch) => {
+  try {
+    const { data } = await api.updatePost(id, post);
+
+    dispatch({ type: UPDATE, payload: data });
+  } catch (error) {
+    console.log(error.message);
+  }
+};
+
+export const likePost = (id) => async (dispatch) => {
+  try {
+    const { data } = await api.likePost(id);
+
+    dispatch({ type: LIKE, payload: data });
+  } catch (error) {
+    console.log(error.message);
+  }
+};
+
+export const deletePost = (id) => async (dispatch) => {
+  try {
+    await api.deletePost(id);
+
+    dispatch({ type: DELETE, payload: id });
+  } catch (error) {
+    console.log(error.message);
+  }
+};
