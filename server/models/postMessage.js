@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
-//creating a mongoose schema
-//we are going to specify that each post is going to have to have theese things
+    //creating a mongoose schema
+    //we are going to specify that each post is going to have to have theese things
 const postSchema = mongoose.Schema({
     title: String,
     message: String,
@@ -17,7 +17,7 @@ const postSchema = mongoose.Schema({
     }
 });
 
-//turning Schema into a model
+    //turning Schema into a model
 const PostMessage = mongoose.model('PostMessage', postSchema);
 
 export default PostMessage;
