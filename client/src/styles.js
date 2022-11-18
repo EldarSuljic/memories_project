@@ -15,7 +15,7 @@ export default makeStyles((theme) => ({
       image: {
         marginLeft: '15px',
       },
-      //run the css after this only for the devices that are small, this is materialUI thing
+        //run the css after this only for the devices that are small, this is materialUI thing
       [theme.breakpoints.down('sm')]: {
         mainContainer: {
           flexDirection: "column-reverse",

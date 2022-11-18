@@ -1,8 +1,8 @@
-//reducer is a function that accepts the state and action, then based on the action type do some logic and
-//returns either action or the state changed by the action, usually multiple if statements, thats why switch is prefered
+    //reducer is a function that accepts the state and action, then based on the action type do some logic and
+    //returns either action or the state changed by the action, usually multiple if statements, thats why switch is prefered
 import { FETCH_ALL, CREATE, UPDATE, LIKE, DELETE } from '../constants/actionTypes';
 
-// eslint-disable-next-line import/no-anonymous-default-export
+    //eslint-disable-next-line import/no-anonymous-default-export
 export default (posts = [], action) => {
     switch (action.type) {
         case DELETE:
@@ -18,5 +18,5 @@ export default (posts = [], action) => {
             return posts;
     }
 }
-//action.payload is updated post
-//renaming state to posts to simplify things because our state is always going to be simply post since we have one reducer
+    //action.payload is updated post
+    //renaming state to posts to simplify things because our state is always going to be simply post since we have one reducer

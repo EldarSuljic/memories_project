@@ -1,4 +1,4 @@
-//using axios for makinkg api calss
+    //using axios for makinkg api calss
 import axios from 'axios';
 
 const url = 'http://localhost:5000/posts'; //url pointing to backend route
